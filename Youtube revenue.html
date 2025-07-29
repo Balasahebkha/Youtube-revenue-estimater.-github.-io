@@ -1,0 +1,97 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YouTube Revenue Estimator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+    h2 {
+      color: #cc0000;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #cc0000;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #a80000;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>YouTube Revenue Estimator</h2>
+  <p>Enter your estimated monthly views:</p>
+  <input type="number" id="viewsInput" placeholder="e.g. 500000">
+  <button onclick="estimateRevenue()">Estimate</button>
+
+  <div class="result" id="output" style="display:none;">
+    <p><strong>Estimated Monthly Revenue:</strong></p>
+    <p id="resultLow"></p>
+    <p id="resultHigh"></p>
+  </div>
+</div>
+
+<script>
+  function estimateRevenue() {
+    const views = parseInt(document.getElementById("viewsInput").value);
+    const CPM_LOW = 0.5; // Low estimate
+    const CPM_HIGH = 5.0; // High estimate
+
+    if (isNaN(views) || views <= 0) {
+      alert("Please enter a valid number of views.");
+      return;
+    }
+
+    const revenueLow = (views / 1000) * CPM_LOW;
+    const revenueHigh = (views / 1000) * CPM_HIGH;
+
+    document.getElementById("resultLow").textContent = `$${revenueLow.toFixed(2)} (Low CPM)`;
+    document.getElementById("resultHigh").textContent = `$${revenueHigh.toFixed(2)} (High CPM)`;
+    document.getElementById("output").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
